@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sender-deployment
+  name: reader-deployment
   labels:
-    app: sender
+    app: reader
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sender
+      app: reader
   template:
     metadata:
       labels:
-        app: sender
+        app: reader
     spec:
       containers:
-      - name: sender
+      - name: reader
         image: simonliska/saturday:go-rabbit-latest
         imagePullPolicy: Always
-        command: ["./send"]
+        command: ["./read"]

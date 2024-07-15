@@ -1,5 +1,5 @@
 # Go - Rabbit MQ connector
-Simple Go application for sending messages to RabbitMQ.
+Simple Go application for sending/reading messages to/from RabbitMQ.
 ## Requirements
 Install Go, Docker, K3d, Kubectl, Helm
 ### Prepare environment 
@@ -29,14 +29,18 @@ docker push simonliska/saturday:go-rabbit-latest
 ```
 Apply deployment to K3d, check status:
 ```sh 
-kubectl apply -f sender-deployment.yaml
+kubectl apply -f sender-deployment.yaml -f reader-deployment.yaml
 kubectl get pods -w
 ```
-Check logs (replace your pod name):
+Check sender logs:
 ```sh 
-kubectl logs sender-deployment-785689f55b-9bdbv
+kubectl logs -l app=sender
 2024/04/28 16:38:03  [x] Sent Hello World!
 2024/04/28 16:39:03  [x] Sent Hello World!
 2024/04/28 16:40:03  [x] Sent Hello World!
+```
+Check reader logs:
+```sh
+kubectl logs -l app=reader
 ```
 Nicely done!
